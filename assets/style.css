@@ -1,180 +1,155 @@
 html {
-    box-sizing: border-box;
-  }
-  
-  *, *::before, *::after {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
-  }
-  
-  :root {
-    --light-green: #00ff00;
-    --dark-green: #003b00;
-    --dark-grey: #777;
-    --light-grey: #dadce0;
-  }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  }
-  
-  a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  a.button {
-    border: 2px solid #004400;
-    color: var(--dark-green);
-    border-radius: 4px;
-    padding: 6px 24px;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  
-  a.button:hover {
-    text-decoration: none;
-    background-color: var(--dark-green);
-    color: var(--light-green);
-  }
-  
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #2a9d8f;  /* Muted teal */
+  --secondary-color: #264653;  /* Dark slate blue */
+  --accent-color: #e9c46a;  /* Warm yellow */
+  --light-color: #f4f4f9;  /* Very light gray */
+  --dark-grey: #555;
+  --light-grey: #dadce0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  background-color: var(--light-color);
+  color: var(--secondary-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  transition: color 0.3s;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-color);
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  color: var(--accent-color);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: var(--light-color);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+form {
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  font-size: 16px;
+  padding-left: 10px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.github-button {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.github-button:hover {
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+}
+
+.container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 100px 20px 40px;
+}
+
+@media screen and (max-width: 768px) {
   header {
-    width: 100%;
-    height: 50px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    background-color: red; /* Change navbar color to red */
-    padding: 5px 10px;
-    align-items: center;
-  }
-  
-  .logo {
-    color: #002200;
-  }
-  
-  form {
-    height: calc(100% - 10px);
-  }
-  
-  .search-input {
-    width: 500px;
-    height: 100%;
-    border-radius: 4px;
-    border-color: transparent;
-    background-color: var(--dark-green);
-    color: var(--light-green);
-    font-size: 16px;
-    line-height: 1.4;
-    padding-left: 5px;
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 80px 20px 40px;
-  }
-  
-  .result-count {
-    color: var(--dark-grey);
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  
-  .search-results {
-    display: grid; /* Use grid display for search results */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid columns */
-    gap: 20px; /* Space between grid items */
-    list-style: none;
-  }
-  
-  .search-result-item {
-    border: 1px solid var(--light-grey);
-    padding: 15px;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-  
-  .result-image {
-    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
     height: auto;
-    margin-bottom: 15px;
   }
-  
-  .title {
-    margin-bottom: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+
+  nav {
+    flex-basis: 100%;
+    order: 3;
+    margin-top: 10px;
   }
-  
-  .description {
-    color: var(--dark-grey);
-    margin-bottom: 15px;
-    font-size: 14px;
+
+  form {
+    flex-basis: 100%;
+    order: 2;
   }
-  
-  .metadata {
-    display: flex;
-    color: var(--dark-green);
-    font-size: 14px;
+
+  .github-button {
+    order: 4;
+    margin-top: 10px;
   }
-  
-  .published-date::before {
-    content: '\0000a0\002022\0000a0';
-    margin: 0 3px;
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
-  
-  .pagination {
-    margin-top: 20px;
+
+  .search-input {
+    width: 100%;
   }
-  
-  .previous-page {
-    margin-right: 20px;
-  }
-  
-  @media screen and (max-width: 550px) {
-    header {
-      flex-direction: column;
-      height: auto;
-      padding-bottom: 10px;
-    }
-  
-    .logo {
-      display: inline-block;
-      margin-bottom: 10px;
-    }
-  
-    form, .search-input {
-      width: 100%;
-    }
-  
-    .github-button {
-      display: none;
-    }
-  
-    .title {
-      font-size: 18px;
-    }
-  
-    .description {
-      font-size: 14px;
-    }
-  
-    .result-image {
-      display: none;
-    }
-  }
-  
+}

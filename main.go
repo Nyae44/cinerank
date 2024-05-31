@@ -33,6 +33,13 @@ func searchHandler(moviesapi *movies.Client) http.HandlerFunc {
 			page = "1"
 		}
 
+		results, err := moviesapi.FetchRatedMovies(searchQuery, page)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		fmt.Printf("%+v", results)
 		fmt.Println("Search Query is: ", searchQuery)
 		fmt.Println("Page is: ", page)
 	}

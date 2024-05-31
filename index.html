@@ -14,7 +14,7 @@
                 <input 
                 autofocus
                 class="search-input"
-                value=""
+                value="{{.Query}}"
                 placeholder="Enter a movie title"
                 type="search"
                 name="q"
@@ -27,6 +27,27 @@
 
 
         </header>
+        <section class="container">
+            <ul class="search-results">
+                {{ range .Results.Results }}
+                <li class="movie-article">
+                  <div>
+                    <a target="_blank" rel="noreferrer noopener" href="/movies/{{ .ID }}">
+                      <h3 class="title">{{ .Title }}</h3>
+                    </a>
+                    <p class="description">{{ .Overview }}</p>
+                    <div class="metadata">
+                      <p class="release-date">{{ .ReleaseDate }}</p>
+                      <p class="popularity">Popularity: {{ .Popularity }}</p>
+                      <p class="vote-average">Rating: {{ .VoteAverage }}</p>
+                    </div>
+                  </div>
+                  <img class="movie-poster" src="https://image.tmdb.org/t/p/w500{{ .PosterPath }}" alt="Poster for {{ .Title }}" />
+                </li>
+                {{ end }}
+              </ul>
+
+        </section>
     </main>
     
 </body>

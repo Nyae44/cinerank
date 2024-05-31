@@ -120,6 +120,20 @@ form {
   padding: 100px 20px 40px;
 }
 
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 20px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.search-results img {
+  width: 100%;
+  height: auto;
+  max-width: 100px;
+}
+
 @media screen and (max-width: 768px) {
   header {
     flex-wrap: wrap;
@@ -151,5 +165,13 @@ form {
 
   .search-input {
     width: 100%;
+  }
+
+  .search-results {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .search-results img {
+    max-width: 80px;
   }
 }

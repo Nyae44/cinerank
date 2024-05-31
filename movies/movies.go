@@ -39,7 +39,7 @@ type Client struct {
 }
 
 func (c *Client) FetchRatedMovies(query, page string) (*MovieAPIResponse, error) {
-	endpoint := fmt.Sprintf("https://api.themoviedb.org/3/movie/top_rated?api_key=%s&language=en-US&page=%s", url.QueryEscape(c.key), url.QueryEscape(page))
+	endpoint := fmt.Sprintf("https://api.themoviedb.org/3/movie/top_rated?api_key=%s&language=en-US&query=q&page=%s", url.QueryEscape(c.key), url.QueryEscape(page))
 
 	resp, err := c.http.Get(endpoint)
 	if err != nil {

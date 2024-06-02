@@ -1,59 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cinerank</title>
-    <link rel="stylesheet" href="/assets/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
     <main>
-        <header>
-            <a href="/" class="logo">Cinerank</a>
-            <form action="/search" method="GET">
-                <input 
-                autofocus
-                class="search-input"
-                value="{{.Query}}"
-                placeholder="Enter a movie title"
-                type="search"
-                name="q"
-                />
-            </form>
-            <a 
-            href="https://github.com/nyae44/cinerank"
-            class="button github-button"
-            >View on Github</a>
-        </header>
-        <section class="container">
-            <div class="results-count">
-                {{if .Results }}
-                    {{if (gt .Results.TotalResults 0)}}
-                        <p>About <strong>{{.Results.TotalResults}}</strong> results were found.</p>
-                    {{else if and (ne .Query "") (eq .Results.TotalResults 0)}}
-                        <p>No results found for your query: <strong>{{ .Query}}</strong>.</p>
-                    {{end}}
-                {{end}} 
+      <header>
+        <a href="/" class="logo">Cinerank</a>
+        <form action="/search" method="GET">
+          <input
+            autofocus
+            class="search-input"
+            value="{{.Query}}"
+            placeholder="Enter a movie title"
+            type="search"
+            name="q"
+          />
+        </form>
+        <a
+          href="https://github.com/nyae44/cinerank"
+          class="button github-button"
+          >View on Github</a
+        >
+      </header>
+      <section class="container">
+        <div class="results-count">
+          {{if .Results }} {{if (gt .Results.TotalResults 0)}}
+          <p>
+            About <strong>{{.Results.TotalResults}}</strong> results were found.
+            You are on page <strong>{{.CurrentPage}}</strong> of <strong>{{.TotalPages}}</strong>
+          </p>
+          {{else if and (ne .Query "") (eq .Results.TotalResults 0)}}
+          <p>No results found for your query: <strong>{{ .Query}}</strong>.</p>
+          {{end}} {{end}}
+          
+        </div>
+        <ul class="search-results">
+          {{ range .Results.Results }}
+          <li class="movie-article">
+            <div>
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="/movies/{{ .ID }}"
+              >
+                <h3 class="title">{{ .Title }}</h3>
+              </a>
+              <p class="description">{{ .Overview }}</p>
+              
+              <div class="metadata">
+                <p class="release-date">{{ .ReleaseDate }}</p>
+                <p class="popularity">Popularity: {{ .Popularity }}</p>
+                <p class="vote-average">Rating: {{ .VoteAverage }}</p>
+              </div>
             </div>
-            <ul class="search-results">
-                {{ range .Results.Results }}
-                    <li class="movie-article">
-                        <div>
-                            <a target="_blank" rel="noreferrer noopener" href="/movies/{{ .ID }}">
-                                <h3 class="title">{{ .Title }}</h3>
-                            </a>
-                            <p class="description">{{ .Overview }}</p>
-                            <div class="metadata">
-                                <p class="release-date">{{ .ReleaseDate }}</p>
-                                <p class="popularity">Popularity: {{ .Popularity }}</p>
-                                <p class="vote-average">Rating: {{ .VoteAverage }}</p>
-                            </div>
-                        </div>
-                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500{{ .PosterPath }}" alt="Poster for {{ .Title }}" />
-                    </li>
-                {{ end }}
-            </ul>
-        </section>
+            <img
+              class="movie-poster"
+              src="https://image.tmdb.org/t/p/w500{{ .PosterPath }}"
+              alt="Poster for {{ .Title }}"
+            />
+          </li>
+          {{ end }}
+        </ul>
+        <div class="pagination">
+          {{ if . }} {{ if (gt .NextPage 2) }}
+          <a
+            href="/search?q={{ .Query }}&page={{ .PreviousPage }}"
+            class="button previous-page"
+            >Previous</a
+          >
+          {{ end }} {{ if (ne .IsLastPage true) }}
+          <a
+            href="/search?q={{ .Query }}&page={{ .NextPage }}"
+            class="button next-page"
+            >Next</a
+          >
+          {{ end }} {{ end }}
+        </div>
+      </section>
     </main>
-</body>
+    <script src="/assets/script.js"></script>
+  </body>
 </html>

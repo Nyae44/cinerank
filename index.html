@@ -9,7 +9,7 @@
 <body>
     <main>
         <header>
-            <a  href="/" class="logo">Cinerank</a>
+            <a href="/" class="logo">Cinerank</a>
             <form action="/search" method="GET">
                 <input 
                 autofocus
@@ -24,31 +24,36 @@
             href="https://github.com/nyae44/cinerank"
             class="button github-button"
             >View on Github</a>
-
-
         </header>
         <section class="container">
+            <div class="results-count">
+                {{if .Results }}
+                    {{if (gt .Results.TotalResults 0)}}
+                        <p>About <strong>{{.Results.TotalResults}}</strong> results were found.</p>
+                    {{else if and (ne .Query "") (eq .Results.TotalResults 0)}}
+                        <p>No results found for your query: <strong>{{ .Query}}</strong>.</p>
+                    {{end}}
+                {{end}} 
+            </div>
             <ul class="search-results">
                 {{ range .Results.Results }}
-                <li class="movie-article">
-                  <div>
-                    <a target="_blank" rel="noreferrer noopener" href="/movies/{{ .ID }}">
-                      <h3 class="title">{{ .Title }}</h3>
-                    </a>
-                    <p class="description">{{ .Overview }}</p>
-                    <div class="metadata">
-                      <p class="release-date">{{ .ReleaseDate }}</p>
-                      <p class="popularity">Popularity: {{ .Popularity }}</p>
-                      <p class="vote-average">Rating: {{ .VoteAverage }}</p>
-                    </div>
-                  </div>
-                  <img class="movie-poster" src="https://image.tmdb.org/t/p/w500{{ .PosterPath }}" alt="Poster for {{ .Title }}" />
-                </li>
+                    <li class="movie-article">
+                        <div>
+                            <a target="_blank" rel="noreferrer noopener" href="/movies/{{ .ID }}">
+                                <h3 class="title">{{ .Title }}</h3>
+                            </a>
+                            <p class="description">{{ .Overview }}</p>
+                            <div class="metadata">
+                                <p class="release-date">{{ .ReleaseDate }}</p>
+                                <p class="popularity">Popularity: {{ .Popularity }}</p>
+                                <p class="vote-average">Rating: {{ .VoteAverage }}</p>
+                            </div>
+                        </div>
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500{{ .PosterPath }}" alt="Poster for {{ .Title }}" />
+                    </li>
                 {{ end }}
-              </ul>
-
+            </ul>
         </section>
     </main>
-    
 </body>
 </html>
